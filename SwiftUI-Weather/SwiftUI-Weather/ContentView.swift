@@ -31,7 +31,13 @@ struct ContentView: View {
                         .foregroundColor(.white)
                 }
                 HStack {
-                    WeatherDayView()
+                    WeatherDayView(dayOfWeek: "TUE", imageName: "cloud.heavyrain", temperature: "57°")
+                    WeatherDayView(dayOfWeek: "WED", imageName: "cloud.heavyrain", temperature: "52°")
+                    WeatherDayView(dayOfWeek: "THU", imageName: "cloud.heavyrain", temperature: "72°")
+                    WeatherDayView(dayOfWeek: "FRI", imageName: "cloud.heavyrain", temperature: "49°")
+                    WeatherDayView(dayOfWeek: "SAT", imageName: "cloud.heavyrain", temperature: "53°")
+                    WeatherDayView(dayOfWeek: "SUN", imageName: "cloud.heavyrain", temperature: "55°")
+                    
                 }
                 Spacer()
             }
@@ -44,6 +50,7 @@ struct ContentView_Previews: PreviewProvider {
         Group {
             ContentView()
             ContentView()
+                
         }
     }
 }
@@ -52,7 +59,7 @@ struct WeatherDayView: View {
     
     var dayOfWeek: String
     var imageName: String
-    var temperature: Int
+    var temperature: String
     
     var body: some View {
         VStack {
@@ -66,7 +73,7 @@ struct WeatherDayView: View {
                 .frame(width: 40, height: 40)
             
             Text(temperature)
-                .font(.system(size: 28, weight: .medium, design: .default))
+                .font(.system(size: 26, weight: .medium, design: .default))
                 .foregroundColor(.white)
         }
     }
