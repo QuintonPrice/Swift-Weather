@@ -8,15 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var isNight = false
+    
     var body: some View {
         ZStack {
-            BackgroundView(topColor: .blue, bottomColor: Color("lightBlue"))
+            BackgroundView(topColor: isNight ? .black : .blue, bottomColor: isNight ? .gray : Color("lightBlue"))
             
             VStack {
                 
                 CityTextView(cityName: "Seattle, WA")
                 
-                MainWeatherStatusView(imageName: "cloud.sun.fill", temperature: 46)
+                MainWeatherStatusView(imageName: isNight ? "moon.stars.fill" : "cloud.sun.fill", temperature: 46)
                 
                 HStack(spacing: 20) {
                     WeatherDayView(dayOfWeek: "TUE",
@@ -43,10 +46,11 @@ struct ContentView: View {
                                    imageName: "cloud.sun.fill",
                                    temperature: 55)
                 }
+
                 Spacer()
                 
                 Button {
-                    print("tapped")
+                    isNight.toggle() // toggles boolean value
                 } label: {
                     WeatherButton(title: "Toggle Dark Mode", textColor: .blue, backgroundColor: .white)
                 }
@@ -61,6 +65,7 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             ContentView()
+                
             
         }
     }
@@ -121,13 +126,13 @@ struct MainWeatherStatusView: View {
     
     var body: some View {
         VStack(spacing: 10) {
-            Image(systemName: "cloud.sun.fill")
+            Image(systemName: imageName)
                 .renderingMode(.original)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 180, height: 180)
             
-            Text("\(temperature)")
+            Text("\(temperature)°")
                 .font(.system(size: 70, weight: .medium, design: .default))
                 .foregroundColor(.white)
         }
