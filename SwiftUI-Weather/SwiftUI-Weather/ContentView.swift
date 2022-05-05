@@ -114,7 +114,7 @@ struct CityTextView: View {
     
     var body: some View {
         Text(cityName)
-            .font(.system(size: 32, weight: .medium, design: .default))
+            .font(.system(size: 37, weight: .medium, design: .default))
             .foregroundColor(.white)
             .padding()
     }
