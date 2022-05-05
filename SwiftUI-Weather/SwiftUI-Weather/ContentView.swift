@@ -7,46 +7,48 @@
 
 import SwiftUI
 
+// struct used for weather array
+struct Weather {
+    let id = UUID()
+    
+    let dayOfWeek: String
+    let imageName: String
+    let temperature: Int
+}
+
+// Main ContentView
 struct ContentView: View {
     
+    // used for darkmode
     @State private var isNight = false
+    
+    // populate weather array
+    let weather = [
+        Weather(dayOfWeek: "TUE", imageName: "cloud.sun.fill", temperature: 57),
+        Weather(dayOfWeek: "WED", imageName: "cloud.moon.rain.fill", temperature: 52),
+        Weather(dayOfWeek: "THU", imageName: "sun.dust.fill", temperature: 72),
+        Weather(dayOfWeek: "FRI", imageName: "cloud.sun.fill", temperature: 49),
+        Weather(dayOfWeek: "SAT", imageName: "cloud.sun.fill", temperature: 53),
+    ]
+    
     
     var body: some View {
         ZStack {
             BackgroundView(isNight: $isNight)
             
             VStack {
-                
                 CityTextView(cityName: "Seattle, WA")
-                
                 MainWeatherStatusView(imageName: isNight ? "moon.stars.fill" : "cloud.sun.fill", temperature: 46)
                 
+                // 5 day forecast
                 HStack(spacing: 20) {
-                    WeatherDayView(dayOfWeek: "TUE",
-                                   imageName: "cloud.sun.fill",
-                                   temperature: 57)
-                    
-                    WeatherDayView(dayOfWeek: "WED",
-                                   imageName: "cloud.moon.rain.fill",
-                                   temperature: 52)
-                    
-                    WeatherDayView(dayOfWeek: "THU",
-                                   imageName: "sun.dust.fill",
-                                   temperature: 72)
-                    
-                    WeatherDayView(dayOfWeek: "FRI",
-                                   imageName: "cloud.sun.fill",
-                                   temperature: 49)
-                    
-                    WeatherDayView(dayOfWeek: "SAT",
-                                   imageName: "cloud.sun.fill",
-                                   temperature: 53)
-                    
-                    WeatherDayView(dayOfWeek: "SUN",
-                                   imageName: "cloud.sun.fill",
-                                   temperature: 55)
+                    ForEach(weather, id: \.id) { weather in
+                        WeatherDayView(dayOfWeek: weather.dayOfWeek,
+                                       imageName: weather.imageName,
+                                       temperature: weather.temperature)
+                    }
                 }
-
+                
                 Spacer()
                 
                 Button {
@@ -65,7 +67,7 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             ContentView()
-                
+            
             
         }
     }
@@ -96,7 +98,7 @@ struct WeatherDayView: View {
 }
 
 struct BackgroundView: View {
-
+    
     @Binding var isNight: Bool
     
     var body: some View {
@@ -139,35 +141,33 @@ struct MainWeatherStatusView: View {
     }
 }
 
-struct WeekForecastView: View {
-    
-    var body: some View {
-        HStack(spacing: 20) {
-            WeatherDayView(dayOfWeek: "TUE",
-                           imageName: "cloud.sun.fill",
-                           temperature: 57)
-            
-            WeatherDayView(dayOfWeek: "WED",
-                           imageName: "cloud.moon.rain.fill",
-                           temperature: 52)
-            
-            WeatherDayView(dayOfWeek: "THU",
-                           imageName: "sun.dust.fill",
-                           temperature: 72)
-            
-            WeatherDayView(dayOfWeek: "FRI",
-                           imageName: "cloud.sun.fill",
-                           temperature: 49)
-            
-            WeatherDayView(dayOfWeek: "SAT",
-                           imageName: "cloud.sun.fill",
-                           temperature: 53)
-            
-            WeatherDayView(dayOfWeek: "SUN",
-                           imageName: "cloud.sun.fill",
-                           temperature: 55)
-        }
-    }
-}
-
-
+//struct WeekForecastView: View {
+//
+//    var body: some View {
+//        HStack(spacing: 20) {
+//            WeatherDayView(dayOfWeek: "TUE",
+//                           imageName: "cloud.sun.fill",
+//                           temperature: 57)
+//
+//            WeatherDayView(dayOfWeek: "WED",
+//                           imageName: "cloud.moon.rain.fill",
+//                           temperature: 52)
+//
+//            WeatherDayView(dayOfWeek: "THU",
+//                           imageName: "sun.dust.fill",
+//                           temperature: 72)
+//
+//            WeatherDayView(dayOfWeek: "FRI",
+//                           imageName: "cloud.sun.fill",
+//                           temperature: 49)
+//
+//            WeatherDayView(dayOfWeek: "SAT",
+//                           imageName: "cloud.sun.fill",
+//                           temperature: 53)
+//
+//            WeatherDayView(dayOfWeek: "SUN",
+//                           imageName: "cloud.sun.fill",
+//                           temperature: 55)
+//        }
+//    }
+//}
