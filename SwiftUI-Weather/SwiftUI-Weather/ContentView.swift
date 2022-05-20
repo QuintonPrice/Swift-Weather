@@ -143,7 +143,7 @@ struct ContentView: View {
             
             VStack {
                 ForEach(weatherArray, id: \.self) { result in
-                    CityTextView(cityName: (result.name))
+                    CityTextView(cityName: (result.name), countryName: (result.sys.country))
                     MainWeatherStatusView(
                         imageName: isNight ? "moon.stars.fill" : "cloud.sun.fill",
                         temperature: Int(convertTemperature(temp: (result.main.temp), from: .kelvin, to: .fahrenheit)),
@@ -176,7 +176,7 @@ struct ContentView: View {
     // retrieves API data
     func handleAPIData() async {
         
-        guard let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?q=Seattle&appid=673c2c51f8a9ae9ceacaee7a8e3aa885") else {
+        guard let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?lat=47.6062&lon=-122.3321&appid=673c2c51f8a9ae9ceacaee7a8e3aa885") else {
             print("This URL does not work!")
             return
         }
@@ -242,41 +242,13 @@ struct BackgroundView: View {
 struct CityTextView: View {
     
     var cityName: String
+    var countryName: String
     
     var body: some View {
-        Text(cityName)
+        Text("\(cityName), \(countryName)")
             .font(.system(size: 37, weight: .medium, design: .default))
             .foregroundColor(.white)
             .padding()
-    }
-}
-
-struct MainWeatherStatusView: View {
-    
-    var imageName: String
-    var temperature: Int
-    var description: String
-    var high, low: Int
-    
-    var body: some View {
-        VStack(spacing: 5) {
-            Image(systemName: imageName)
-                .renderingMode(.original)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 180, height: 180)
-            
-            Text("\(temperature)°")
-                .font(.system(size: 70, weight: .medium, design: .default))
-                .foregroundColor(.white)
-            Text("\(description)")
-                .font(.system(size: 30, weight: .bold, design: .default))
-                .foregroundColor(.white)
-            Text("H: \(high)°  L: \(low)°")
-                .font(.system(size: 20, weight: .medium, design: .default))
-                .foregroundColor(.white)
-        }
-        .padding(.bottom, 40)
     }
 }
 
