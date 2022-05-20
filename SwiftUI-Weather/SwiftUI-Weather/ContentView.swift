@@ -149,15 +149,17 @@ struct ContentView: View {
                     MainWeatherStatusView(
                         imageName: isNight ? "moon.stars.fill" : "cloud.sun.fill",
                         
-                        temperature: Int(convertTemperature(temp: (result.main.temp), from: .kelvin, to: .fahrenheit)),
-                        
+                        temperature: Int(result.main.temp),
+                                                
                         description: result.weather[0].description,
                         
-                        high: Int(convertTemperature(temp: (result.main.temp_max), from: .kelvin, to: .fahrenheit)),
+                        high: Int((result.main.temp_max)),
                         
-                        low: Int(convertTemperature(temp: (result.main.temp_min), from: .kelvin, to: .fahrenheit)))
+                        low: Int(result.main.temp_min))
+                        
                 }
-//                // 5 day forecast
+                
+                // 5 day forecast
                 HStack(spacing: 20) {
                     ForEach(weather, id: \.id) { weather in
                         WeatherDayView(dayOfWeek: weather.dayOfWeek,
@@ -183,7 +185,7 @@ struct ContentView: View {
     // retrieves API data
     func handleAPIData() async {
         
-        guard let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?lat=47.6062&lon=-122.3321&appid=673c2c51f8a9ae9ceacaee7a8e3aa885") else {
+        guard let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?lat=47.6062&lon=-122.3321&units=imperial&appid=673c2c51f8a9ae9ceacaee7a8e3aa885") else {
             print("This URL does not work!")
             return
         }
@@ -203,11 +205,11 @@ struct ContentView: View {
     }
     
     // Converts the temperature
-    func convertTemperature(temp: Double, from inputTempType: UnitTemperature, to outputTempType: UnitTemperature) -> Double {
-        let input = Measurement(value: temp, unit: inputTempType)
-        let output = input.converted(to: outputTempType)
-        return output.value
-    }
+//    func convertTemperature(temp: Double, from inputTempType: UnitTemperature, to outputTempType: UnitTemperature) -> Double {
+//        let input = Measurement(value: temp, unit: inputTempType)
+//        let output = input.converted(to: outputTempType)
+//        return output.value
+//    }
 }
 
 
