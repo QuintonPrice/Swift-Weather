@@ -21,18 +21,22 @@ struct MainWeatherStatusView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 180, height: 180)
+                .shadow(radius: 5)
             
             Text("\(temperature)°")
                 .font(.system(size: 70, weight: .medium, design: .default))
                 .foregroundColor(.white)
+                .shadow(radius: 5)
             
             Text("\(description.capitalized)")
                 .font(.system(size: 30, weight: .bold, design: .default))
                 .foregroundColor(.white)
+                .shadow(radius: 5)
             
             Text("H: \(high)°  L: \(low)°")
                 .font(.system(size: 20, weight: .medium, design: .default))
                 .foregroundColor(.white)
+                .shadow(radius: 5)
         }
         .padding(.bottom, 40)
     }

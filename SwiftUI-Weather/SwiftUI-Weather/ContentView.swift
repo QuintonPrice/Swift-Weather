@@ -222,15 +222,20 @@ struct WeatherDayView: View {
             Text(dayOfWeek)
                 .font(.system(size: 16, weight: .medium, design: .default))
                 .foregroundColor(.white)
+                .shadow(radius: 5)
+
             Image(systemName: imageName)
                 .renderingMode(.original)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 40, height: 40)
+                .shadow(radius: 5)
+
             
             Text("\(temperature)°")
                 .font(.system(size: 26, weight: .medium, design: .default))
                 .foregroundColor(.white)
+                .shadow(radius: 5)
         }
     }
 }
@@ -256,6 +261,8 @@ struct CityTextView: View {
             .font(.system(size: 37, weight: .medium, design: .default))
             .foregroundColor(.white)
             .padding()
+            .shadow(radius: 5)
+
     }
 }
 
