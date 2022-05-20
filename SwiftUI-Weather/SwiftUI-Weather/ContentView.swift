@@ -170,11 +170,11 @@ struct ContentView: View {
                 Spacer()
                 
                 // toggle dark mode button
-                Button {
-                    isNight.toggle()
-                } label: {
-                    WeatherButton(title: "Toggle Dark Mode", textColor: .blue, backgroundColor: .white)
-                }
+//                Button {
+//                    isNight.toggle()
+//                } label: {
+//                    WeatherButton(title: "Toggle Dark Mode", textColor: .blue, backgroundColor: .white)
+//                }
             }
         }
         .task { await handleAPIData() } // loads all data
