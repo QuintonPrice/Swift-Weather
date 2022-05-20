@@ -143,12 +143,18 @@ struct ContentView: View {
             
             VStack {
                 ForEach(weatherArray, id: \.self) { result in
+                    
                     CityTextView(cityName: (result.name), countryName: (result.sys.country))
+                    
                     MainWeatherStatusView(
                         imageName: isNight ? "moon.stars.fill" : "cloud.sun.fill",
+                        
                         temperature: Int(convertTemperature(temp: (result.main.temp), from: .kelvin, to: .fahrenheit)),
+                        
                         description: result.weather[0].description,
+                        
                         high: Int(convertTemperature(temp: (result.main.temp_max), from: .kelvin, to: .fahrenheit)),
+                        
                         low: Int(convertTemperature(temp: (result.main.temp_min), from: .kelvin, to: .fahrenheit)))
                 }
 //                // 5 day forecast
@@ -159,6 +165,7 @@ struct ContentView: View {
                                        temperature: weather.temperature)
                     }
                 }
+                
                 
                 Spacer()
                 
