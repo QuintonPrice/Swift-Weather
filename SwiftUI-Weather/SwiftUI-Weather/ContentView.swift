@@ -112,14 +112,7 @@ struct Wind: Codable {
     }
 }
 
-// struct used for weather array
-struct DayOfWeekWeather {
-    let id = UUID()
-    
-    let dayOfWeek: String
-    let imageName: String
-    let temperature: Int
-}
+
 
 // Main ContentView
 struct ContentView: View {
@@ -128,14 +121,6 @@ struct ContentView: View {
     @State private var isNight = false
     @State private var weatherArray: [WeatherJSON] = []
     
-    // populate weather array
-    let weather = [
-        DayOfWeekWeather(dayOfWeek: "TUE", imageName: "cloud.sun.fill", temperature: 57),
-        DayOfWeekWeather(dayOfWeek: "WED", imageName: "cloud.moon.rain.fill", temperature: 52),
-        DayOfWeekWeather(dayOfWeek: "THU", imageName: "sun.dust.fill", temperature: 72),
-        DayOfWeekWeather(dayOfWeek: "FRI", imageName: "cloud.sun.fill", temperature: 49),
-        DayOfWeekWeather(dayOfWeek: "SAT", imageName: "cloud.sun.fill", temperature: 53),
-    ]
     
     var body: some View {
         ZStack {
@@ -150,33 +135,18 @@ struct ContentView: View {
                         imageName: isNight ? "moon.stars.fill" : "cloud.sun.fill",
                         
                         temperature: Int(result.main.temp),
-                                                
+                        
                         description: result.weather[0].description,
                         
                         high: Int((result.main.temp_max)),
                         
                         low: Int(result.main.temp_min))
-                        
+                    
                 }
                 
-                // 5 day forecast
-                HStack(spacing: 20) {
-                    ForEach(weather, id: \.id) { weather in
-                        WeatherDayView(dayOfWeek: weather.dayOfWeek,
-                                       imageName: weather.imageName,
-                                       temperature: weather.temperature)
-                    }
-                }
-                
+                FiveDayForecast()
                 
                 Spacer()
-                
-                // toggle dark mode button
-//                Button {
-//                    isNight.toggle()
-//                } label: {
-//                    WeatherButton(title: "Toggle Dark Mode", textColor: .blue, backgroundColor: .white)
-//                }
             }
         }
         .task { await handleAPIData() } // loads all data
@@ -203,43 +173,6 @@ struct ContentView: View {
             print("Did not work :(")
         }
     }
-    
-    // Converts the temperature
-//    func convertTemperature(temp: Double, from inputTempType: UnitTemperature, to outputTempType: UnitTemperature) -> Double {
-//        let input = Measurement(value: temp, unit: inputTempType)
-//        let output = input.converted(to: outputTempType)
-//        return output.value
-//    }
-}
-
-
-struct WeatherDayView: View {
-    
-    var dayOfWeek: String
-    var imageName: String
-    var temperature: Int
-    
-    var body: some View {
-        VStack {
-            Text(dayOfWeek)
-                .font(.system(size: 16, weight: .medium, design: .default))
-                .foregroundColor(.white)
-                .shadow(radius: 5)
-
-            Image(systemName: imageName)
-                .renderingMode(.original)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 40, height: 40)
-                .shadow(radius: 5)
-
-            
-            Text("\(temperature)°")
-                .font(.system(size: 26, weight: .medium, design: .default))
-                .foregroundColor(.white)
-                .shadow(radius: 5)
-        }
-    }
 }
 
 struct BackgroundView: View {
@@ -252,7 +185,6 @@ struct BackgroundView: View {
     }
 }
 
-
 struct CityTextView: View {
     
     var cityName: String
@@ -264,7 +196,7 @@ struct CityTextView: View {
             .foregroundColor(.white)
             .padding()
             .shadow(radius: 5)
-
+        
     }
 }
 

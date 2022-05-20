@@ -13,6 +13,7 @@
 		389D36C12820C193008AB5E3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 389D36C02820C193008AB5E3 /* Preview Assets.xcassets */; };
 		38A1DD2B28374D5C00E968DF /* TemperatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A1DD2A28374D5C00E968DF /* TemperatureView.swift */; };
 		38A9F630283763A600FCADDF /* MainWeatherStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A9F62F283763A600FCADDF /* MainWeatherStatusView.swift */; };
+		38A9F63228380E4200FCADDF /* FiveDayForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A9F63128380E4200FCADDF /* FiveDayForecast.swift */; };
 		38AA4D272823474A00A8B50F /* WeatherButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AA4D262823474A00A8B50F /* WeatherButton.swift */; };
 /* End PBXBuildFile section */
 
@@ -24,6 +25,7 @@
 		389D36C02820C193008AB5E3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		38A1DD2A28374D5C00E968DF /* TemperatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureView.swift; sourceTree = "<group>"; };
 		38A9F62F283763A600FCADDF /* MainWeatherStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWeatherStatusView.swift; sourceTree = "<group>"; };
+		38A9F63128380E4200FCADDF /* FiveDayForecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveDayForecast.swift; sourceTree = "<group>"; };
 		38AA4D262823474A00A8B50F /* WeatherButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -67,6 +69,7 @@
 				3892178828247046005B3BF7 /* WeatherAPIClient */,
 				389D36B92820C190008AB5E3 /* SwiftUI_WeatherApp.swift */,
 				389D36BB2820C190008AB5E3 /* ContentView.swift */,
+				38A9F63128380E4200FCADDF /* FiveDayForecast.swift */,
 				38A9F62F283763A600FCADDF /* MainWeatherStatusView.swift */,
 				38AA4D262823474A00A8B50F /* WeatherButton.swift */,
 				38A1DD2A28374D5C00E968DF /* TemperatureView.swift */,
@@ -155,6 +158,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				38A9F630283763A600FCADDF /* MainWeatherStatusView.swift in Sources */,
+				38A9F63228380E4200FCADDF /* FiveDayForecast.swift in Sources */,
 				389D36BC2820C190008AB5E3 /* ContentView.swift in Sources */,
 				38A1DD2B28374D5C00E968DF /* TemperatureView.swift in Sources */,
 				389D36BA2820C190008AB5E3 /* SwiftUI_WeatherApp.swift in Sources */,
