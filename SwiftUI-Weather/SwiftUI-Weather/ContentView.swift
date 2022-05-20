@@ -8,18 +8,10 @@
 import SwiftUI
 
 // holds all data from the JSON request
-struct WeatherJSON: Codable, Hashable {
-    
-    // checking stoof
-    static func == (lhs: WeatherJSON, rhs: WeatherJSON) -> Bool {
-        lhs.name == rhs.name
-    }
-    
-    // hashing stoof
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(name)
-    }
-    
+struct WeatherJSON: Codable, Identifiable {
+
+    let identity = UUID()
+
     var coord: Coord            // coordinate struct
     var weather: [Weather]      // array of Weather struct
     var base: String            // "internal parameter..?"
@@ -32,6 +24,22 @@ struct WeatherJSON: Codable, Hashable {
     var timezone, id: Int       // timezone
     var name: String            // city namme
     var cod: Int                // another internal parameter (..?)
+    
+    init() {
+        weather = []
+        coord = Coord()
+        base = "test"
+        main = Main()
+        visibility = 0
+        wind = Wind()
+        clouds = Clouds()
+        dt = 0
+        sys = Sys()
+        timezone = 0
+        id = 0
+        name = "test name"
+        cod = 0
+    }
 }
 
 struct Clouds: Codable {
@@ -55,7 +63,7 @@ struct Main: Codable {
     var humidity: Int
     var temp_min: Double
     var temp_max: Double
-    
+
     init() {
         temp = 0.0
         pressure = 0
@@ -69,7 +77,7 @@ struct Sys: Codable {
     var type, id: Int
     var country: String
     var sunrise, sunset: Int
-    
+
     init() {
         type = 0
         id = 0
@@ -79,21 +87,13 @@ struct Sys: Codable {
     }
 }
 
-struct Weather: Codable, Hashable {
-    
-    // checking stoof
-    static func == (lhs: Weather, rhs: Weather) -> Bool {
-        lhs.main == rhs.main
-    }
-    
-    // hashing stoof
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(main)
-    }
-    
+struct Weather: Codable, Identifiable {
+
+    let identity = UUID()
+
     var id: Int
     var main, description, icon: String
-    
+
     init() {
         id = 1
         main = "Test main"
@@ -105,14 +105,12 @@ struct Weather: Codable, Hashable {
 struct Wind: Codable {
     var speed: Double
     var deg: Int
-    
+
     init() {
         speed = 100
         deg = 100
     }
 }
-
-
 
 // Main ContentView
 struct ContentView: View {
@@ -121,27 +119,26 @@ struct ContentView: View {
     @State private var isNight = false
     @State private var weatherArray: [WeatherJSON] = []
     
-    
     var body: some View {
         ZStack {
             BackgroundView(isNight: $isNight)
             
             VStack {
-                ForEach(weatherArray, id: \.self) { result in
-                    
+                ForEach(weatherArray) { result in
+
                     CityTextView(cityName: (result.name), countryName: (result.sys.country))
-                    
+
                     MainWeatherStatusView(
                         imageName: isNight ? "moon.stars.fill" : "cloud.sun.fill",
-                        
+
                         temperature: Int(result.main.temp),
-                        
+
                         description: result.weather[0].description,
-                        
+
                         high: Int((result.main.temp_max)),
-                        
+
                         low: Int(result.main.temp_min))
-                    
+
                 }
                 
                 FiveDayForecast()
@@ -151,24 +148,25 @@ struct ContentView: View {
         }
         .task { await handleAPIData() } // loads all data
     }
+
     
     // retrieves API data
     func handleAPIData() async {
-        
+
         guard let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?lat=47.6062&lon=-122.3321&units=imperial&appid=673c2c51f8a9ae9ceacaee7a8e3aa885") else {
             print("This URL does not work!")
             return
         }
-        
+
         let decoder = JSONDecoder()
-        
+
         do {
             let (weatherData, _) = try await URLSession.shared.data(from: url)
             if let weatherObj = try? decoder.decode(WeatherJSON.self, from: weatherData) {
+                print("handleAPIData() on ContentView executed!")
                 weatherArray.append(weatherObj)
-                // print(weatherArray[0])
             }
-            
+
         } catch {
             print("Did not work :(")
         }
