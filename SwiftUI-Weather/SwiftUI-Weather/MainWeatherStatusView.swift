@@ -25,9 +25,11 @@ struct MainWeatherStatusView: View {
             Text("\(temperature)°")
                 .font(.system(size: 70, weight: .medium, design: .default))
                 .foregroundColor(.white)
+            
             Text("\(description.capitalized)")
                 .font(.system(size: 30, weight: .bold, design: .default))
                 .foregroundColor(.white)
+            
             Text("H: \(high)°  L: \(low)°")
                 .font(.system(size: 20, weight: .medium, design: .default))
                 .foregroundColor(.white)
