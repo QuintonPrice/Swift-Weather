@@ -1,13 +1,44 @@
 //
-//  FiveDayForecast.swift
+//  FiveDayAPI
 //  SwiftUI-Weather
 //
-//  Created by Quinton Price on 5/20/22.
+//  Created by Quinton Price on 5/24/22.
 //
 
-import SwiftUI
+import Foundation
 
-// Holds JSON Response
+class FiveDayAPI {
+    
+    var fiveDayArray = [FiveList]()
+    
+    func handleAPIData() async -> [FiveList] {
+        
+        guard let url = URL(string: "https://api.openweathermap.org/data/2.5/forecast/daily?lat=46.0493&lon=-118.3883&units=imperial&appid=673c2c51f8a9ae9ceacaee7a8e3aa885&cnt=5") else {
+            print("This URL does not work!")
+            return []
+        }
+        
+        let decoder = JSONDecoder()
+        
+        do {
+            let (weatherData, _) = try await URLSession.shared.data(from: url)
+            if let weatherObj = try? decoder.decode(FiveDayJSON.self, from: weatherData) {
+                print("handleAPIData() on FiveDayForecast executed!")
+                fiveDayArray = weatherObj.list
+                return fiveDayArray
+            }
+        } catch {
+            print("Did not work :(")
+        }
+        return []
+    }
+    
+    // used to test
+    func printText() {
+        print("This is a test from an APIData object!")
+    }
+}
+
 struct FiveDayJSON: Codable, Hashable {
     
     static func == (lhs: FiveDayJSON, rhs: FiveDayJSON) -> Bool {
@@ -145,81 +176,3 @@ struct FiveWeather: Codable, Identifiable {
     }
 }
 
-
-struct FiveDayForecast: View {
-    
-    @State private var fiveDayArray = [FiveList]()
-    
-    var body: some View {
-        // 5 day forecast
-        
-        HStack(spacing: 20) {
-            ForEach(fiveDayArray, id: \.self) { result in
-                WeatherDayView(dayOfWeek: "DAY", imageName: "cloud.sun.fill", max: Int(result.temp.max), min: Int(result.temp.min))
-            }
-        }
-        .task {
-            await handleAPIData()
-        }
-    }
-    
-    func handleAPIData() async {
-        
-        guard let url = URL(string: "https://api.openweathermap.org/data/2.5/forecast/daily?lat=47.6062&lon=-122.3321&units=imperial&appid=673c2c51f8a9ae9ceacaee7a8e3aa885&cnt=5") else {
-            print("This URL does not work!")
-            return
-        }
-        
-        let decoder = JSONDecoder()
-        
-        do {
-            let (weatherData, _) = try await URLSession.shared.data(from: url)
-            if let weatherObj = try? decoder.decode(FiveDayJSON.self, from: weatherData) {
-                print("handleAPIData() on FiveDayForecast executed!")
-                fiveDayArray = weatherObj.list
-            }
-        } catch {
-            print("Did not work :(")
-        }
-    }
-}
-
-struct WeatherDayView: View {
-    
-    var dayOfWeek: String
-    var imageName: String
-    
-    var max: Int
-    var min: Int
-    
-    var body: some View {
-        VStack {
-            Text(dayOfWeek)
-                .font(.system(size: 16, weight: .medium, design: .default))
-                .foregroundColor(.white)
-                .shadow(radius: 5)
-            
-            Image(systemName: imageName)
-                .renderingMode(.original)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 40, height: 40)
-                .shadow(radius: 5)
-            
-            Text("\(max)°")
-                .font(.system(size: 26, weight: .medium, design: .default))
-                .foregroundColor(.white)
-                .shadow(radius: 5)
-            Text("\(min)°")
-                .font(.system(size: 18, weight: .medium, design: .default))
-                .foregroundColor(.white)
-                .shadow(radius: 4)
-        }
-    }
-}
-
-struct FiveDayForecast_Previews: PreviewProvider {
-    static var previews: some View {
-        FiveDayForecast()
-    }
-}
