@@ -13,7 +13,6 @@ struct ContentView: View {
     
     // used for darkmode
     @State private var isNight = false
-//    @State private var apiArray: [WeatherJSON] = []
     @State private var apiArray = [WeatherJSON]()
 
     
@@ -46,14 +45,9 @@ struct ContentView: View {
         }
         .task {
             let api = CurrentAPI()
-//            await api.handleAPIData()
-//            apiArray = api.weatherArray
             apiArray = await api.handleAPIData()
         }
     }
-
-    
-
 }
 
 struct BackgroundView: View {
