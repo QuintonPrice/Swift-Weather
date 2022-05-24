@@ -17,6 +17,7 @@
 		38DE0979283D959800650C45 /* FiveDayAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DE0978283D959800650C45 /* FiveDayAPI.swift */; };
 		38DE097B283D969300650C45 /* CurrentAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DE097A283D969300650C45 /* CurrentAPI.swift */; };
 		38DE097F283D989C00650C45 /* ConvertToSF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DE097E283D989C00650C45 /* ConvertToSF.swift */; };
+		38DE0981283D9BC900650C45 /* LocationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DE0980283D9BC900650C45 /* LocationData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		38DE0978283D959800650C45 /* FiveDayAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveDayAPI.swift; sourceTree = "<group>"; };
 		38DE097A283D969300650C45 /* CurrentAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentAPI.swift; sourceTree = "<group>"; };
 		38DE097E283D989C00650C45 /* ConvertToSF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertToSF.swift; sourceTree = "<group>"; };
+		38DE0980283D9BC900650C45 /* LocationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 				38DE0978283D959800650C45 /* FiveDayAPI.swift */,
 				38DE097A283D969300650C45 /* CurrentAPI.swift */,
 				38DE097E283D989C00650C45 /* ConvertToSF.swift */,
+				38DE0980283D9BC900650C45 /* LocationData.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -171,6 +174,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38DE0981283D9BC900650C45 /* LocationData.swift in Sources */,
 				38DE0979283D959800650C45 /* FiveDayAPI.swift in Sources */,
 				38DE097F283D989C00650C45 /* ConvertToSF.swift in Sources */,
 				38A9F630283763A600FCADDF /* MainWeatherStatusView.swift in Sources */,

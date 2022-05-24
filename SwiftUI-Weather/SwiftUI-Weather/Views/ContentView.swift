@@ -14,7 +14,7 @@ struct ContentView: View {
     // used for darkmode
     @State private var isNight = false
     @State private var apiArray = [WeatherJSON]()
-
+    
     
     var body: some View {
         ZStack {
@@ -22,20 +22,20 @@ struct ContentView: View {
             
             VStack {
                 ForEach(apiArray) { result in
-
+                    
                     CityTextView(cityName: (result.name), countryName: (result.sys.country))
-
+                    
                     MainWeatherStatusView(
                         imageName: isNight ? "moon.stars.fill" : "cloud.sun.fill",
-
+                        
                         temperature: Int(result.main.temp),
-
+                        
                         description: result.weather[0].description,
-
+                        
                         high: Int((result.main.temp_max)),
-
+                        
                         low: Int(result.main.temp_min))
-
+                    
                 }
                 
                 FiveDayForecast()
@@ -47,6 +47,11 @@ struct ContentView: View {
             let api = CurrentAPI()
             apiArray = await api.handleAPIData()
         }
+//        Button {
+//            let lat = Location()
+//        } label: {
+//            WeatherButton(title: "Print Coordinates", textColor: .blue, backgroundColor: .white)
+//        }
     }
 }
 
