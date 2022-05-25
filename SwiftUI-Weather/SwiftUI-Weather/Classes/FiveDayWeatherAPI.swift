@@ -7,16 +7,32 @@
 
 import Foundation
 
-class FiveDayAPI {
+class FiveDayWeatherAPI {
     
     var fiveDayArray = [FiveList]()
+
+    var lat: Double
+    var lon: Double
     
+    init() {
+        lat = 999.9
+        lon = 999.9
+    }
+    
+    func setLatLon(latitude: Double, longitude: Double) {
+        lat = latitude
+        lon = longitude
+    }
+    
+    /// Handles the API call and returns a [FiveList] array
     func handleAPIData() async -> [FiveList] {
         
-        guard let url = URL(string: "https://api.openweathermap.org/data/2.5/forecast/daily?lat=46.0493&lon=-118.3883&units=imperial&appid=673c2c51f8a9ae9ceacaee7a8e3aa885&cnt=5") else {
+        guard let url = URL(string: "https://api.openweathermap.org/data/2.5/forecast/daily?lat=\(lat)&lon=\(lon)&units=imperial&appid=673c2c51f8a9ae9ceacaee7a8e3aa885&cnt=5") else {
             print("This URL does not work!")
             return []
         }
+        
+        print(url)
         
         let decoder = JSONDecoder()
         

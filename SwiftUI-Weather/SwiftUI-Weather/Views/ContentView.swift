@@ -6,18 +6,20 @@
 //
 
 import SwiftUI
-
+import CoreLocation
 
 // Main ContentView
 struct ContentView: View {
     
-    // used for darkmode
     @State private var isNight = false
     @State private var apiArray = [WeatherJSON]()
-    
+    @ObservedObject private var locationManager = LocationManager()
     
     var body: some View {
-        ZStack {
+        
+        let coordinate = self.locationManager.location != nil ? self.locationManager.location!.coordinate : CLLocationCoordinate2D()
+        
+        return ZStack {
             BackgroundView(isNight: $isNight)
             
             VStack {
@@ -27,31 +29,22 @@ struct ContentView: View {
                     
                     MainWeatherStatusView(
                         imageName: isNight ? "moon.stars.fill" : "cloud.sun.fill",
-                        
                         temperature: Int(result.main.temp),
-                        
                         description: result.weather[0].description,
-                        
                         high: Int((result.main.temp_max)),
-                        
                         low: Int(result.main.temp_min))
-                    
                 }
                 
-                FiveDayForecast()
+                FiveDayForecast(lat: coordinate.latitude, lon: coordinate.longitude)
                 
                 Spacer()
             }
         }
         .task {
-            let api = CurrentAPI()
+            let api = CurrentWeatherAPI()
+            api.setLatLon(latitude: coordinate.latitude, longitude: coordinate.longitude)
             apiArray = await api.handleAPIData()
         }
-//        Button {
-//            let lat = Location()
-//        } label: {
-//            WeatherButton(title: "Print Coordinates", textColor: .blue, backgroundColor: .white)
-//        }
     }
 }
 

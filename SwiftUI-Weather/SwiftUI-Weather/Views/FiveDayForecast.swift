@@ -6,21 +6,30 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct FiveDayForecast: View {
     
+    var lat = 0.0
+    var lon = 0.0
+    
     @State private var apiArray = [FiveList]()
+    @ObservedObject private var locationManager = LocationManager()
     
     var body: some View {
+        
+//        let coordinate = self.locationManager.location != nil ? self.locationManager.location!.coordinate : CLLocationCoordinate2D()
+        
         // 5 day forecast
-        HStack(spacing: 20) {
+        return HStack(spacing: 20) {
             ForEach(apiArray, id: \.self) { result in
                 WeatherDayView(dayOfWeek: "DAY", imageID: result.weather[0].id, max: Int(result.temp.max), min: Int(result.temp.min))
             }
         }
         .task {
-            let api = FiveDayAPI()
-            apiArray = await api.handleAPIData()
+            let fiveApi = FiveDayWeatherAPI()
+            fiveApi.setLatLon(latitude: lat, longitude: lon)
+            apiArray = await fiveApi.handleAPIData()
         }
     }
 }

@@ -6,19 +6,36 @@
 //
 
 import Foundation
+import CoreLocation
 
-class CurrentAPI {
+class CurrentWeatherAPI {
     
     var weatherArray: [WeatherJSON] = []
+    
+    var lat: Double
+    var lon: Double
+    
+    init() {
+        lat = 999.9
+        lon = 999.9
+    }
+    
+    // sets latitude and longitude
+    func setLatLon(latitude: Double, longitude: Double) {
+        lat = latitude
+        lon = longitude
+    }
     
     // retrieves API data
     func handleAPIData() async -> [WeatherJSON] {
 
-        guard let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?lat=46.0493&lon=-118.3883&units=imperial&appid=673c2c51f8a9ae9ceacaee7a8e3aa885") else {
+        guard let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?lat=\(lat)&lon=\(lon)&units=imperial&appid=673c2c51f8a9ae9ceacaee7a8e3aa885") else {
             print("This URL does not work!")
             return []
         }
 
+        print(url)
+        
         let decoder = JSONDecoder()
 
         do {

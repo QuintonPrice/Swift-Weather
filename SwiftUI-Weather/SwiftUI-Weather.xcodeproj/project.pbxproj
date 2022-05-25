@@ -14,10 +14,10 @@
 		38A9F630283763A600FCADDF /* MainWeatherStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A9F62F283763A600FCADDF /* MainWeatherStatusView.swift */; };
 		38A9F63228380E4200FCADDF /* FiveDayForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A9F63128380E4200FCADDF /* FiveDayForecast.swift */; };
 		38AA4D272823474A00A8B50F /* WeatherButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AA4D262823474A00A8B50F /* WeatherButton.swift */; };
-		38DE0979283D959800650C45 /* FiveDayAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DE0978283D959800650C45 /* FiveDayAPI.swift */; };
-		38DE097B283D969300650C45 /* CurrentAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DE097A283D969300650C45 /* CurrentAPI.swift */; };
+		38DE0979283D959800650C45 /* FiveDayWeatherAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DE0978283D959800650C45 /* FiveDayWeatherAPI.swift */; };
+		38DE097B283D969300650C45 /* CurrentWeatherAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DE097A283D969300650C45 /* CurrentWeatherAPI.swift */; };
 		38DE097F283D989C00650C45 /* ConvertToSF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DE097E283D989C00650C45 /* ConvertToSF.swift */; };
-		38DE0981283D9BC900650C45 /* LocationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DE0980283D9BC900650C45 /* LocationData.swift */; };
+		38DE0981283D9BC900650C45 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DE0980283D9BC900650C45 /* LocationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,10 +29,11 @@
 		38A9F62F283763A600FCADDF /* MainWeatherStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWeatherStatusView.swift; sourceTree = "<group>"; };
 		38A9F63128380E4200FCADDF /* FiveDayForecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveDayForecast.swift; sourceTree = "<group>"; };
 		38AA4D262823474A00A8B50F /* WeatherButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherButton.swift; sourceTree = "<group>"; };
-		38DE0978283D959800650C45 /* FiveDayAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveDayAPI.swift; sourceTree = "<group>"; };
-		38DE097A283D969300650C45 /* CurrentAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentAPI.swift; sourceTree = "<group>"; };
+		38DE0978283D959800650C45 /* FiveDayWeatherAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveDayWeatherAPI.swift; sourceTree = "<group>"; };
+		38DE097A283D969300650C45 /* CurrentWeatherAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherAPI.swift; sourceTree = "<group>"; };
 		38DE097E283D989C00650C45 /* ConvertToSF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertToSF.swift; sourceTree = "<group>"; };
-		38DE0980283D9BC900650C45 /* LocationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationData.swift; sourceTree = "<group>"; };
+		38DE0980283D9BC900650C45 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		38DE0982283DA33600650C45 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +66,7 @@
 		389D36B82820C190008AB5E3 /* SwiftUI-Weather */ = {
 			isa = PBXGroup;
 			children = (
+				38DE0982283DA33600650C45 /* Info.plist */,
 				38DE097D283D986300650C45 /* Views */,
 				38DE097C283D984A00650C45 /* Classes */,
 				389D36BD2820C192008AB5E3 /* Assets.xcassets */,
@@ -84,10 +86,10 @@
 		38DE097C283D984A00650C45 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				38DE0978283D959800650C45 /* FiveDayAPI.swift */,
-				38DE097A283D969300650C45 /* CurrentAPI.swift */,
+				38DE0978283D959800650C45 /* FiveDayWeatherAPI.swift */,
+				38DE097A283D969300650C45 /* CurrentWeatherAPI.swift */,
 				38DE097E283D989C00650C45 /* ConvertToSF.swift */,
-				38DE0980283D9BC900650C45 /* LocationData.swift */,
+				38DE0980283D9BC900650C45 /* LocationManager.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -174,14 +176,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				38DE0981283D9BC900650C45 /* LocationData.swift in Sources */,
-				38DE0979283D959800650C45 /* FiveDayAPI.swift in Sources */,
+				38DE0981283D9BC900650C45 /* LocationManager.swift in Sources */,
+				38DE0979283D959800650C45 /* FiveDayWeatherAPI.swift in Sources */,
 				38DE097F283D989C00650C45 /* ConvertToSF.swift in Sources */,
 				38A9F630283763A600FCADDF /* MainWeatherStatusView.swift in Sources */,
 				38A9F63228380E4200FCADDF /* FiveDayForecast.swift in Sources */,
 				389D36BC2820C190008AB5E3 /* ContentView.swift in Sources */,
 				389D36BA2820C190008AB5E3 /* SwiftUI_WeatherApp.swift in Sources */,
-				38DE097B283D969300650C45 /* CurrentAPI.swift in Sources */,
+				38DE097B283D969300650C45 /* CurrentWeatherAPI.swift in Sources */,
 				38AA4D272823474A00A8B50F /* WeatherButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -314,6 +316,7 @@
 				DEVELOPMENT_TEAM = 2CLSVX29P9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "SwiftUI-Weather/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -343,6 +346,7 @@
 				DEVELOPMENT_TEAM = 2CLSVX29P9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "SwiftUI-Weather/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
