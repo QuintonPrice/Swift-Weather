@@ -9,14 +9,16 @@ import SwiftUI
 
 struct MainWeatherStatusView: View {
     
-    var imageName: String
+    var imageID: Int
     var temperature: Int
     var description: String
     var high, low: Int
     
+    var sf = SFConverted()
+    
     var body: some View {
         VStack(spacing: 10) {
-            Image(systemName: imageName)
+            Image(systemName: sf.convertToSFSymbol(weatherCode: imageID))
                 .renderingMode(.original)
                 .resizable()
                 .aspectRatio(contentMode: .fit)

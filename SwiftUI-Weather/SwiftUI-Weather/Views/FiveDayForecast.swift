@@ -17,9 +17,7 @@ struct FiveDayForecast: View {
     @ObservedObject private var locationManager = LocationManager()
     
     var body: some View {
-        
-//        let coordinate = self.locationManager.location != nil ? self.locationManager.location!.coordinate : CLLocationCoordinate2D()
-        
+                
         // 5 day forecast
         return HStack(spacing: 20) {
             ForEach(apiArray, id: \.self) { result in

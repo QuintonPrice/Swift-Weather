@@ -28,7 +28,7 @@ struct ContentView: View {
                     CityTextView(cityName: (result.name), countryName: (result.sys.country))
                     
                     MainWeatherStatusView(
-                        imageName: isNight ? "moon.stars.fill" : "cloud.sun.fill",
+                        imageID: result.weather[0].id,
                         temperature: Int(result.main.temp),
                         description: result.weather[0].description,
                         high: Int((result.main.temp_max)),
